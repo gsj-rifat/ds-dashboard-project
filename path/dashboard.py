@@ -151,7 +151,8 @@ class BarChart(MatplotlibViz):
         # pass the data to the `predict_proba` method
         # Index the second column of predict_proba output
         # The shape should be (<number of records>, 1)
-        proba = self.predictor.predict_proba(data)[:, 1]
+        proba = self.predictor.predict_proba(data)
+        proba = proba[:, 1]
 
         # Below, create a `pred` variable set to
         # the number we want to visualize
@@ -266,11 +267,10 @@ def root():
 # an ID of `2`. 
 # parameterize the employee ID 
 # to a string datatype
-@app.route("/employee/<string:id>", methods=["GET"])
+@app.route("/employee/{id:str}", methods=["GET"])
 def employee_report(id: str):
     # Call the initialized report, pass the ID and an instance of the Employee SQL class as arguments
     # Return the result
-    db_path = '/path/python-package/employee_events/employee_events.db'
     employee = Employee()
     return report(id, employee)
 
@@ -282,11 +282,10 @@ def employee_report(id: str):
 # an ID of `2`. 
 # parameterize the team ID 
 # to a string datatype
-@app.route("/team/<string:id>", methods=["GET"])
+@app.route("/team/{id:str}", methods=["GET"])
 def team_report(id: str):
     # Call the initialized report, pass the ID and an instance of the Team SQL class as arguments
     # Return the result
-    db_path = '/path/python-package/employee_events/employee_events.db'
     team = Team()
     return report(id, team)
 
