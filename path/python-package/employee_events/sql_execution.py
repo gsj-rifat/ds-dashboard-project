@@ -5,15 +5,15 @@ import pandas as pd
 
 # Using pathlib, create a `db_path` variable
 # that points to the absolute path for the `employee_events.db` file
-db_path = Path('/path/python-package/employee_events/employee_events.db').resolve()
-
+#db_path = Path('/path/python-package/employee_events/employee_events.db').resolve()
+#db_path = Path(__file__).parent / "employee_events.db"
+db_path = Path(__file__).parent.absolute() / "employee_events.db"
 #print(db_path)  # This will print the absolute path to the console
 
 
 # Define a class called `QueryMixin`
 class QueryMixin:
     #db_path = Path('/path/python-package/employee_events/employee_events.db').resolve()
-
     # Define a method named `pandas_query`
     # that receives an sql query as a string
     # and returns the query's result
@@ -30,8 +30,7 @@ class QueryMixin:
     def query(self, sql_query: str) -> list:
         with connect(db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute(sql_query)
-            return cursor.fetchall()
+            return cursor.execute(sql_query).fetchall()
     
 
 def query(func):

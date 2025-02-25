@@ -146,7 +146,6 @@ class BarChart(MatplotlibViz):
         # to receive the data that can be passed to the machine
         # learning model
         data = model.model_data(entity_id)
-        print(len(data) )
 
         # Using the predictor class attribute
         # pass the data to the `predict_proba` method
