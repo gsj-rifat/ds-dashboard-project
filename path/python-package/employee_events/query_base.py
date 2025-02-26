@@ -1,7 +1,5 @@
 # Import any dependencies needed to execute sql queries
-from sqlite3 import connect
 
-import pandas as pd
 from .sql_execution import QueryMixin
 
 
