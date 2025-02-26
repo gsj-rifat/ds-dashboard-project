@@ -15,7 +15,7 @@ from report.utils import load_model
 Below, we import the parent classes
 you will use for subclassing
 """
-from base_components import (
+from report.base_components import (
     Dropdown,
     BaseComponent,
     Radio,
@@ -23,7 +23,7 @@ from base_components import (
     DataTable
 )
 
-from combined_components import FormGroup, CombinedComponent
+from report.combined_components import FormGroup, CombinedComponent
 
 
 # Create a subclass of base_components/dropdown
