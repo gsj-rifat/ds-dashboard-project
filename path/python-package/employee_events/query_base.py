@@ -33,12 +33,12 @@ class QueryBase(QueryMixin):
         # order by the event_date column
         sql_query = f"""
                 SELECT event_date, 
-                       SUM(CASE WHEN event_type = 'positive' THEN 1 ELSE 0 END) AS positive_events,
-                       SUM(CASE WHEN event_type = 'negative' THEN 1 ELSE 0 END) AS negative_events
+                        SUM(positive_events) AS positive_events,
+                        SUM(negative_events) AS negative_events
                 FROM {self.name}
                 WHERE id = {id}
                 JOIN employee_events
-                USING ({self.name}_id)
+                    USING ({self.name}_id)
                 WHERE {self.name}.{self.name}_id = {id}
                 GROUP BY event_date
                 ORDER BY event_date
@@ -61,7 +61,7 @@ class QueryBase(QueryMixin):
         sql_query = f"""
                 SELECT note_date, note
                 JOIN {self.name}
-                USING ({self.name}_id)
+                    USING ({self.name}_id)
                 WHERE {self.name}.{self.name}_id = {id}
                 ORDER BY note_date
                 """

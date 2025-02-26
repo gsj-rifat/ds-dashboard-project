@@ -35,8 +35,8 @@ class Team(QueryBase):
         # Query 6: Select team_name for the team with the specified ID
         sql_query = f"""
         SELECT team_name
-        FROM {self.name}
-        WHERE team_id = {id}
+            FROM {self.name}
+            WHERE team_id = {id}
         """
         return self.query(sql_query=sql_query)
 
@@ -58,7 +58,7 @@ class Team(QueryBase):
                         SUM(negative_events) AS negative_events
                     FROM {self.name}
                     JOIN employee_events
-                    USING ({self.name}_id)
+                        USING ({self.name}_id)
                     WHERE {self.name}.{self.name}_id = {id}
                     GROUP BY employee_id
                 )
