@@ -3,8 +3,6 @@ from .query_base import QueryBase
 
 # Import dependencies needed for sql execution
 # from the `sql_execution` module
-import sqlite3
-import pandas as pd
 
 # Define a subclass of QueryBase
 # called Employee
@@ -44,7 +42,7 @@ class Employee(QueryBase):
                 SELECT first_name || ' ' || last_name as full_name
                 FROM {self.name}
                 WHERE employee_id = {id}
-                """
+        """
         return self.query(sql_query=query)
 
 
@@ -63,7 +61,7 @@ class Employee(QueryBase):
                         SUM(negative_events) AS negative_events
                     FROM {self.name}
                     JOIN employee_events
-                        USING ({self.name}_id)
+                    USING ({self.name}_id)
                     WHERE {self.name}.{self.name}_id = {id}
                 """
         return self.pandas_query(sql_query=query)
