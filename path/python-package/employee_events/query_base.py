@@ -1,5 +1,5 @@
 # Import any dependencies needed to execute sql queries
-import pandas as pd
+
 from .sql_execution import QueryMixin
 
 
@@ -22,6 +22,7 @@ class QueryBase(QueryMixin):
     # that receives an `id` argument
     # This method should return a pandas dataframe
     def event_counts(self, id):
+
         # QUERY 1
         # Write an SQL query that groups by `event_date`
         # and sums the number of positive and negative events
@@ -35,7 +36,9 @@ class QueryBase(QueryMixin):
                         SUM(positive_events) AS positive_events,
                         SUM(negative_events) AS negative_events
                 FROM {self.name}
-                JOIN employee_events USING ({self.name}_id)
+                WHERE id = {id}
+                JOIN employee_events
+                    USING ({self.name}_id)
                 WHERE {self.name}.{self.name}_id = {id}
                 GROUP BY event_date
                 ORDER BY event_date
@@ -57,9 +60,10 @@ class QueryBase(QueryMixin):
         # for the table name in the `name` class attribute
         sql_query = f"""
                 SELECT note_date, note
-                FROM notes
-                JOIN {self.name} USING ({self.name}_id)
+                JOIN {self.name}
+                    USING ({self.name}_id)
                 WHERE {self.name}.{self.name}_id = {id}
+                ORDER BY note_date
                 """
         return self.pandas_query(sql_query)
 
