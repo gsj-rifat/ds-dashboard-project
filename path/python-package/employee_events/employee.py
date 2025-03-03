@@ -20,7 +20,7 @@ class Employee(QueryBase):
     def names(self):
         # Query 3: Select full name and id of all employees
         query = f"""
-        SELECT first_name || ' ' || last_name as full_name, employee_id
+        SELECT (first_name || ' ' || last_name) AS full_name, employee_id
         FROM {self.name}
         """
         return self.query(sql_query=query)
@@ -39,7 +39,7 @@ class Employee(QueryBase):
         # to only return the full name of the employee
         # with an id equal to the id argument
         query = f"""
-                SELECT first_name || ' ' || last_name as full_name
+                SELECT (first_name || ' ' || last_name) AS full_name
                 FROM {self.name}
                 WHERE employee_id = {id}
         """
